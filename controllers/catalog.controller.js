@@ -3,8 +3,7 @@ const {inspect} = require('util');
 const ERROR = 'error';
 const TRACE = 'trace';
 class CatalogController{
-  constructor(){    
-    this.log("StartingCatalog" + JSON.stringify(process.env));
+  constructor(){        
     this.api = axios.create({
       baseURL: 'http://gutendex.com/books',
       timeout: 3000
