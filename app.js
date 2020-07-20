@@ -1,18 +1,17 @@
 var express = require('express');
 var app = express();
+const axios = require('axios');
+const CatalogController = require("./controllers/catalog.controller");
+const catalog = new CatalogController();
+const GutenbergController = require("./controllers/gutenberg.controller");
+const gutenberg = new GutenbergController();
 
-app.get('/', function(req, res) {
-  res.send({
-    "Output": "Hello World! I am an app"
-  });
+app.get('/catalog/search', async (req, res)=>{
+  return await catalog.search(req,res)  
 });
 
-app.post('/', function(req, res) {
-  res.send({
-    "Output": "Hello World!"
-  });
+app.get('/files/:bookId/:fileId', async (req,res)=> {
+  return await gutenberg.getFile(req,res);
 });
 
-
-// Export your Express configuration so that it can be consumed by the Lambda handler
-module.exports = app
+module.exports = app;

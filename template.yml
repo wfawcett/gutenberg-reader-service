@@ -14,6 +14,18 @@ Parameters:
     Type: String
     Description: The name for a project pipeline stage, such as Staging or Prod, for which resources are provisioned and deployed.
     Default: ''
+  SelfApi:
+    Type: String
+    Description: URL reference to this api
+    Default: https://0d81l0rbi6.execute-api.us-west-2.amazonaws.com/Prod
+  Gutendex:
+    Type: String
+    Description: URL to Gutendex (Catalog site)
+    Default: http://gutendex.com/books
+  Gutenberg:
+    Type: String
+    Description: URL to Gutendex (Catalog site)
+    Default: http://www.gutenberg.org
 
 Globals:
   Function:
@@ -30,9 +42,13 @@ Resources:
       FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-HelloWorld'
       Handler: index.handler
       Runtime: nodejs12.x
+      Timeout: 10
       Environment:
         Variables:
           NODE_ENV: production
+          SELF_API: !Ref SelfApi
+          GUTENDEX: !Ref Gutendex
+          GUTENBERG: !Ref Gutenberg 
       Role:
         Fn::GetAtt:
         - LambdaExecutionRole
@@ -48,6 +64,16 @@ Resources:
           Properties:
             Path: /
             Method: post
+        GetCatalogSearch: 
+          Type: Api
+          Properties:
+            Path: /catalog/search
+            Method: get
+        GetFile: 
+          Type: Api
+          Properties:
+            Path: /files/{bookId}/{fileId}
+            Method: get
   LambdaExecutionRole:
     Description: Creating service role in IAM for AWS Lambda
     Type: AWS::IAM::Role
