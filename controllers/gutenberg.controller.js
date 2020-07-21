@@ -2,6 +2,8 @@ const axios = require("axios");
 const {inspect} = require('util');
 const ERROR = 'error';
 const TRACE = 'trace';
+const {process} = require("../helpers/parser.helper");
+
 class GutenbergController{
   constructor(){        
     this.api = axios.create({      
@@ -12,7 +14,13 @@ class GutenbergController{
 
   async getFile(req,res){    
     const {bookId, fileId} = req.params;
-    const {data} = await this.api.get(`${bookId}/${fileId}`)
+    let {data} = await this.api.get(`${bookId}/${fileId}`)
+    try{
+      data = process(data);
+    }catch (err){
+      console.log(err);
+    }
+    
     return res.send(data);
   }
 
