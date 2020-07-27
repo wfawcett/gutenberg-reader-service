@@ -37,7 +37,8 @@ class CatalogController{
           return{
             id: result.id,
             title: result.title,
-            url
+            url,
+            raw: result
           }
         }
       }).filter(el=> el)
