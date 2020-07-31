@@ -52,7 +52,7 @@ class CatalogController{
   getTextUrl(formats){
     let textURL = null;    
     try{
-      const txtUrls = _.pick(formats, u=>u.includes('txt'));
+      const txtUrls = _.pick(formats, u=>(u.includes('txt')&&u.includes('files')));
       if(Object.keys(txtUrls).length > 0){
         textURL = txtUrls["text/plain"] || txtUrls["text/plain; charset=utf-8"] || txtUrls["text/plain; charset=iso-8859-1"] || txtUrls["text/plain; charset=us-ascii"];          
       }          
