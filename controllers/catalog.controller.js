@@ -23,7 +23,7 @@ class CatalogController{
   }
   
   async getter(url){
-    const fullUrl = encodeURI(url + '&mime_type=text/plain');
+    const fullUrl = encodeURI(url + '&mime_type=text/plain&topic=short stories');
     const {data} = await this.api.get(fullUrl);        
     return this.simplify(data);
   }
@@ -41,6 +41,7 @@ class CatalogController{
             id: result.id,
             title: result.title,
             url,
+            textURL,
             icon, 
             author           
           }

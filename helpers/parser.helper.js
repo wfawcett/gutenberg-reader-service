@@ -1,5 +1,4 @@
-const bookMatcher = /\*{3}\sSTART.*\*{3}(.[^\*]*)\*{3}\sEND/gms;
-const unreadables = [,];
+const bookMatcher = /\*{3} START.*\*{3} END/gms;
 
 const steps = [
   {pattern: /\r/gms, replacement: ''} // normalize *nix and pc line endings. 
@@ -10,8 +9,8 @@ const steps = [
 
 class ParserHelper{
   static process(textBody){
-    try{
-      let bookText = bookMatcher.exec(textBody)[1];
+    try{      
+      let bookText = bookMatcher.exec(textBody)[0] || textBody; // if the bookMatcher fails return all of it. 
     steps.forEach(step=> {
       bookText = bookText.replace(step.pattern, step.replacement);
     });    
