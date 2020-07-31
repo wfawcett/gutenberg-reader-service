@@ -15,6 +15,6 @@
     },
     "scripts": {
         "test": "mocha --recursive tests",
-        "local": "sam local start-api -p 8080 --env-vars env_local.json"        
+        "local": "sam local start-api -p 8080 --env-vars env_local.json"
     }
 }
