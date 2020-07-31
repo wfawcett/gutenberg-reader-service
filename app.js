@@ -6,6 +6,12 @@ const catalog = new CatalogController();
 const GutenbergController = require("./controllers/gutenberg.controller");
 const gutenberg = new GutenbergController();
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+
 app.get('/catalog/search', async (req, res)=>{
   return await catalog.search(req,res)  
 });
