@@ -22,7 +22,11 @@ app.get('/catalog/search', async (req, res)=>{
 });
 
 app.get('/files/:bookId/:fileId', async (req,res)=> {
-  return await gutenberg.getFile(req,res);
+  try{
+    return await gutenberg.getFile(req,res);
+  } catch (error){
+    return res.status(500).sent("Something broke: " + error.message);
+  }
 });
 
 module.exports = app;
