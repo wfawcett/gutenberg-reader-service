@@ -16,7 +16,8 @@ class ParserHelper{
     });    
     return bookText.split(/\n{2,6}/).map(s => s).filter( x=> x);    
     } catch (err){
-      console.log(err);
+      console.log("Error" + err.message);
+      throw err
     }    
   }
 }

@@ -59,6 +59,7 @@ class CatalogController{
       }          
     } catch(e){
       this.log(e.message, ERROR);
+      res.status(500).send(e.name + ': ' + e.message);
     }
     return textURL;
   }
