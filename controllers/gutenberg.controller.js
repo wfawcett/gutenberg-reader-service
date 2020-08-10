@@ -18,7 +18,8 @@ class GutenbergController{
     try{
       data = process(data);
     }catch (err){
-      console.log(err);
+      console.log("Error Processing file: ", err);
+      throw err;
     }
     
     return res.send(data);
