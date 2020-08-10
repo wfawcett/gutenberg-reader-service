@@ -13,7 +13,12 @@ app.use((req, res, next) => {
 
 
 app.get('/catalog/search', async (req, res)=>{
-  return await catalog.search(req,res)  
+  try{
+    return await catalog.search(req,res)  
+  } catch (error){
+    return res.status(500).sent("Something broke: " + error.message);
+  }
+  
 });
 
 app.get('/files/:bookId/:fileId', async (req,res)=> {
