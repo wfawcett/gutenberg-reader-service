@@ -1,6 +1,7 @@
 const axios = require("axios");
 const _ = require("lodash");
 const {inspect} = require('util');
+const { text } = require("express");
 const ERROR = 'error';
 const TRACE = 'trace';
 class CatalogController{
@@ -36,8 +37,9 @@ class CatalogController{
         if(result.media_type == 'Text' && textURL){                    
           const icon = result.formats['image/jpeg'];
           const author = (result.authors[0] && result.authors[0].name)? result.authors[0].name: null;
-          let url = textURL.replace(process.env.GUTENBERG, process.env.SELF_API)
-          url = textURL.replace('https://www.gutenberg.org', process.env.SELF_API) // cover https as well. 
+          console.log("WHY ISNT THIS WORKING? ", {textURL, G: process.env.GUTENBERG, R: process.env.SELF_API})
+          let m = textURL.match("/files.*")
+          let url = process.env.SELF_API + m[0]          
           return{
             id: result.id,
             title: result.title,
