@@ -36,7 +36,8 @@ class CatalogController{
         if(result.media_type == 'Text' && textURL){                    
           const icon = result.formats['image/jpeg'];
           const author = (result.authors[0] && result.authors[0].name)? result.authors[0].name: null;
-          const url = textURL.replace(process.env.GUTENBERG, process.env.SELF_API)
+          let url = textURL.replace(process.env.GUTENBERG, process.env.SELF_API)
+          url = textURL.replace('https://www.gutenberg.org', process.env.SELF_API) // cover https as well. 
           return{
             id: result.id,
             title: result.title,
