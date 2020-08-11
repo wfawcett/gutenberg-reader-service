@@ -36,10 +36,10 @@ Globals:
       Role: !Ref CodeDeployRole
 
 Resources:
-  HelloWorld:
+  GutenReader:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-HelloWorld'
+      FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-GutenReader'
       Handler: index.handler
       Runtime: nodejs12.x
       Timeout: 29
